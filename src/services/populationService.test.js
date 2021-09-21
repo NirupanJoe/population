@@ -27,7 +27,7 @@ describe('PopulationService', () => {
 		];
 
 		test.each(expectations)('Return %p', (hasActive, string) => {
-			const result = isActive({ state: { location: string }});
+			const result = isActive({ state: { totalPopulation: string }});
 
 			expect(result).toEqual(hasActive);
 		});
