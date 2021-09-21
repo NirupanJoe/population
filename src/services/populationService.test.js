@@ -12,6 +12,7 @@ describe('PopulationService', () => {
 		};
 		const expected = [...state.population, {
 			location: state.location,
+			totalPopulation: state.totalPopulation,
 		}];
 
 		const result = addPopulation({ state });

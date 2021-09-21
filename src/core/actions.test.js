@@ -1,17 +1,25 @@
+/* eslint-disable max-lines-per-function */
 import Population from '../services/populationService';
 import Actions from './actions';
 import context from './context';
 
 describe('Actions', () => {
-	const { LocationInput, AddPopulation } = Actions;
-	const data = Symbol('data');
+	const { LocationInput, AddPopulation, TotalPopulationInput } = Actions;
 	const returnValue = Symbol('returnValue');
 
-	test('LocationInput', () => {
-		const result = LocationInput({ data });
+	describe('update input data', () => {
+		const data = Symbol('data');
+		const expectations = [
+			['location', LocationInput],
+			['totalPopulation', TotalPopulationInput],
+		];
 
-		expect(result).toMatchObject({
-			location: data,
+		test.each(expectations)('%p update data in state', (key, fn) => {
+			const result = fn({ data });
+
+			expect(result).toMatchObject({
+				[key]: data,
+			});
 		});
 	});
 
@@ -23,6 +31,7 @@ describe('Actions', () => {
 		expect(result).toMatchObject({
 			population: returnValue,
 			location: '',
+			totalPopulation: '',
 		});
 	});
 });

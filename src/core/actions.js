@@ -7,11 +7,17 @@ const LocationInput = ({ data }) => ({
 const AddPopulation = (context) => ({
 	population: Population.addPopulation(context),
 	location: '',
+	totalPopulation: '',
+});
+
+const TotalPopulationInput = ({ data }) => ({
+	totalPopulation: data,
 });
 
 const actions = {
 	LocationInput,
 	AddPopulation,
+	TotalPopulationInput,
 };
 
 export default actions;

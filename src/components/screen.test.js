@@ -2,6 +2,7 @@
 
 jest.mock('./location', () => () => <div role="location"/>);
 jest.mock('./addButton', () => () => <div role="add-button"/>);
+jest.mock('./totalPopulation', () => () => <div role="totalPopulation"/>);
 
 import React from 'react';
 import { render } from '@testing-library/react';
@@ -14,5 +15,7 @@ test('Screen renders the location', () => {
 	expect(getByRole('screen')).toBeInTheDocument();
 	expect(getByRole('location')).toBeInTheDocument();
 	expect(getByRole('add-button')).toBeInTheDocument();
-	expect(getByRole('screen')).toHaveTextContent('Population:');
+	expect(getByRole('totalPopulation')).toBeInTheDocument();
+	expect(getByRole('screen'))
+		.toHaveTextContent('Population:TotalPopulation:');
 });
