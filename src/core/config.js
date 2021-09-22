@@ -1,5 +1,5 @@
 const config = {
-	rndStringLength: 5,
+	idLength: 5,
 };
 
 export default config;

@@ -23,6 +23,7 @@ describe('PopulationService', () => {
 
 		const result = addPopulation({ state, config });
 
+		expect(random.rndString).toHaveBeenCalledWith(config.idLength);
 		expect(result).toEqual(expected);
 	});
 

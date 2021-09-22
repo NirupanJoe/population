@@ -3,7 +3,7 @@ import { rndString } from '@laufire/utils/random';
 const Population = {
 	addPopulation: ({ state, config }) =>
 		[...state.population, {
-			id: rndString(config.rndStringLength),
+			id: rndString(config.idLength),
 			location: state.location,
 			totalPopulation: state.totalPopulation,
 		}],
