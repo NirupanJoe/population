@@ -8,7 +8,8 @@ const Population = {
 			totalPopulation: state.totalPopulation,
 		}],
 
-	isActive: ({ state }) => state.totalPopulation === '',
+	isActive: ({ state }) =>
+		state.location === '' || state.totalPopulation === '',
 };
 
 export default Population;
