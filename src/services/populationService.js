@@ -6,10 +6,13 @@ const Population = {
 			id: rndString(config.idLength),
 			location: state.location,
 			totalPopulation: state.totalPopulation,
+			malePopulation: state.malePopulation,
 		}],
 
 	isActive: ({ state }) =>
-		state.location === '' || state.totalPopulation === '',
+		state.location === ''
+		|| state.totalPopulation === ''
+		|| state.malePopulation === '',
 };
 
 export default Population;
