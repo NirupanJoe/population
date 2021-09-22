@@ -1,6 +1,9 @@
+import { rndString } from '@laufire/utils/random';
+
 const Population = {
-	addPopulation: ({ state }) =>
+	addPopulation: ({ state, config }) =>
 		[...state.population, {
+			id: rndString(config.rndStringLength),
 			location: state.location,
 			totalPopulation: state.totalPopulation,
 		}],
