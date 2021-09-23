@@ -5,7 +5,7 @@ const LocationInput = ({ data }) => ({
 });
 
 const AddPopulation = (context) => ({
-	population: Population.addPopulation(context),
+	population: Population.addPopulation({ ...context, data: [context.data] }),
 	location: '',
 	totalPopulation: '',
 	malePopulation: '',

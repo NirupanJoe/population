@@ -1,5 +1,4 @@
 const config = {
-	idLength: 5,
 	tableTitle: [
 		'Location',
 		'TotalPopulation',

@@ -1,10 +1,13 @@
+/* eslint-disable max-lines-per-function */
 import axios from '.pnpm/axios@0.21.4/node_modules/axios';
 import context from '../core/context';
+import Population from './populationService';
 import Remote from './remote';
 
 describe('Remote', () => {
 	const {
 		fetchPopulation,
+		addPopulation,
 	} = Remote;
 	const data = Symbol('data');
 	const result = { data };
@@ -16,8 +19,38 @@ describe('Remote', () => {
 		await fetchPopulation();
 
 		expect(axios.get)
-			.toHaveBeenCalledWith('http://localhost:5500/population');
+			.toHaveBeenCalledWith(context.config.localhostURL);
 		expect(context.actions.UpdatePopulation)
 			.toHaveBeenCalledWith(result.data);
+	});
+
+	describe('addPopulation', () => {
+		const expectations = [
+			['not add', true],
+			['add', false],
+		];
+		const { config } = context;
+
+		test.each(expectations)('%p the population when isActive return %p',
+			async (dummy, isActive) => {
+				const state = {
+					location: Symbol(''),
+					totalPopulation: Symbol(''),
+					malePopulation: Symbol(''),
+					femalePopulation: Symbol(''),
+				};
+
+				jest.spyOn(Population, 'isActive').mockReturnValue(isActive);
+				!isActive && jest.spyOn(axios, 'post').mockReturnValue(result);
+				jest.spyOn(context.actions, 'AddPopulation').mockReturnValue();
+
+				await addPopulation({ state });
+
+				expect(Population.isActive).toHaveBeenCalledWith(context);
+				!isActive && expect(axios.post)
+					.toHaveBeenCalledWith(config.localhostURL, { ...state })
+				&& expect(context.actions.AddPopulation)
+					.toHaveBeenCalledWith(result.data);
+			});
 	});
 });

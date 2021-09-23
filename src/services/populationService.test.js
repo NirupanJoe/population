@@ -1,31 +1,18 @@
 /* eslint-disable max-lines-per-function */
-import context from '../core/context';
 import Population from './populationService';
-import * as random from '@laufire/utils/random';
 
 describe('PopulationService', () => {
 	const { addPopulation, isActive } = Population;
-	const { config } = context;
-	const returnValue = Symbol('returnValue');
 
 	test('AddPopulation return concat list', () => {
-		jest.spyOn(random, 'rndString').mockReturnValue(returnValue);
-
 		const state = {
-			...context.seed,
-			location: 'add',
+			population: [Symbol('population')],
 		};
-		const expected = [...state.population, {
-			id: returnValue,
-			location: state.location,
-			totalPopulation: state.totalPopulation,
-			malePopulation: state.malePopulation,
-			femalePopulation: state.femalePopulation,
-		}];
+		const data = [Symbol('data')];
+		const expected = [...state.population, ...data];
 
-		const result = addPopulation({ state, config });
+		const result = addPopulation({ state, data });
 
-		expect(random.rndString).toHaveBeenCalledWith(config.idLength);
 		expect(result).toEqual(expected);
 	});
 

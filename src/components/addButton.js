@@ -1,12 +1,13 @@
 import { React } from 'react';
 import context from '../core/context';
 import Population from '../services/populationService';
+import Remote from '../services/remote';
 
 const AddButton = () =>
 	<button
-		role="add-button"
+		role="addButton"
 		disabled={ Population.isActive(context) }
-		onClick={ () => context.actions.AddPopulation() }
+		onClick={ () => Remote.addPopulation(context) }
 	>
 		Add
 	</button>;

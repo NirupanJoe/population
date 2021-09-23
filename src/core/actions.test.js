@@ -1,7 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import Population from '../services/populationService';
 import Actions from './actions';
-import context from './context';
 
 describe('Actions', () => {
 	const {
@@ -34,10 +33,16 @@ describe('Actions', () => {
 	});
 
 	test('AddPopulation', () => {
+		const context = {
+			data: Symbol('data'),
+		};
+
 		jest.spyOn(Population, 'addPopulation').mockReturnValue(returnValue);
 
 		const result = AddPopulation(context);
 
+		expect(Population.addPopulation)
+			.toHaveBeenCalledWith({ ...context, data: [context.data] });
 		expect(result).toMatchObject({
 			population: returnValue,
 			location: '',

@@ -1,14 +1,5 @@
-import { rndString } from '@laufire/utils/random';
-
 const Population = {
-	addPopulation: ({ state, config }) =>
-		[...state.population, {
-			id: rndString(config.idLength),
-			location: state.location,
-			totalPopulation: state.totalPopulation,
-			malePopulation: state.malePopulation,
-			femalePopulation: state.femalePopulation,
-		}],
+	addPopulation: ({ state, data }) => [...state.population, ...data],
 
 	isActive: ({ state }) =>
 		state.location === ''
