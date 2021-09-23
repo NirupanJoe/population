@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 /* eslint-disable react/display-name */
 
 jest.mock('./components/location', () => () => <div role="location"/>);
@@ -15,8 +16,12 @@ import React from 'react';
 import { render } from '@testing-library/react';
 
 import App from './App';
+import Remote from './services/remote';
 
-test('App renders the screen', () => {
+test('App renders location, totalPopulation, malePopulation,'
++ 'femalePopulation, addButton, populationTable', () => {
+	jest.spyOn(React, 'useEffect');
+
 	const { getByRole } = render(<App/>);
 
 	expect(getByRole('App')).toBeInTheDocument();
@@ -28,4 +33,5 @@ test('App renders the screen', () => {
 	expect(getByRole('populationTable')).toBeInTheDocument();
 	expect(getByRole('App')).toHaveTextContent('Location:TotalPopulation:'
 	+ 'MalePopulation:FemalePopulation');
+	expect(React.useEffect).toHaveBeenCalledWith(Remote.fetchPopulation, []);
 });

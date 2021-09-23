@@ -24,12 +24,17 @@ const FemalePopulationInput = ({ data }) => ({
 	femalePopulation: data,
 });
 
+const UpdatePopulation = ({ data }) => ({
+	population: data,
+});
+
 const actions = {
 	LocationInput,
 	AddPopulation,
 	TotalPopulationInput,
 	MalePopulationInput,
 	FemalePopulationInput,
+	UpdatePopulation,
 };
 
 export default actions;

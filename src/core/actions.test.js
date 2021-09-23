@@ -4,8 +4,14 @@ import Actions from './actions';
 import context from './context';
 
 describe('Actions', () => {
-	const { LocationInput, AddPopulation, TotalPopulationInput,
-		MalePopulationInput, FemalePopulationInput } = Actions;
+	const {
+		LocationInput,
+		AddPopulation,
+		TotalPopulationInput,
+		MalePopulationInput,
+		FemalePopulationInput,
+		UpdatePopulation,
+	} = Actions;
 	const returnValue = Symbol('returnValue');
 
 	describe('update input data', () => {
@@ -15,6 +21,7 @@ describe('Actions', () => {
 			['totalPopulation', TotalPopulationInput],
 			['malePopulation', MalePopulationInput],
 			['femalePopulation', FemalePopulationInput],
+			['population', UpdatePopulation],
 		];
 
 		test.each(expectations)('%p update data in state', (key, fn) => {
