@@ -20,6 +20,7 @@ describe('PopulationService', () => {
 			location: state.location,
 			totalPopulation: state.totalPopulation,
 			malePopulation: state.malePopulation,
+			femalePopulation: state.femalePopulation,
 		}];
 
 		const result = addPopulation({ state, config });
@@ -30,19 +31,21 @@ describe('PopulationService', () => {
 
 	describe('isActive', () => {
 		const expectations = [
-			[false, 'a', 'a', '5'],
-			[true, '', '', ''],
-			[true, '', 'a', ''],
-			[true, 'a', '', '5'],
+			[false, 'a', 'a', '5', '3'],
+			[true, '', '', '', ''],
+			[true, '', 'a', '', '3'],
+			[true, 'a', '', '5', ''],
 		];
 
 		test.each(expectations)('Return %p', (
-			hasActive, location, totalPopulation, malePopulation
+			hasActive, location, totalPopulation, malePopulation,
+			femalePopulation
 		) => {
 			const result = isActive({ state: {
 				location,
 				totalPopulation,
 				malePopulation,
+				femalePopulation,
 			}});
 
 			expect(result).toEqual(hasActive);

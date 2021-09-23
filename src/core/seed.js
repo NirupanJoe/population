@@ -3,6 +3,7 @@ const seed = {
 	population: [],
 	totalPopulation: '',
 	malePopulation: '',
+	femalePopulation: '',
 };
 
 export default seed;

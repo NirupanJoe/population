@@ -7,12 +7,14 @@ const Population = {
 			location: state.location,
 			totalPopulation: state.totalPopulation,
 			malePopulation: state.malePopulation,
+			femalePopulation: state.femalePopulation,
 		}],
 
 	isActive: ({ state }) =>
 		state.location === ''
 		|| state.totalPopulation === ''
-		|| state.malePopulation === '',
+		|| state.malePopulation === ''
+		|| state.femalePopulation === '',
 };
 
 export default Population;

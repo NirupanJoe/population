@@ -9,6 +9,7 @@ const AddPopulation = (context) => ({
 	location: '',
 	totalPopulation: '',
 	malePopulation: '',
+	femalePopulation: '',
 });
 
 const TotalPopulationInput = ({ data }) => ({
@@ -19,11 +20,16 @@ const MalePopulationInput = ({ data }) => ({
 	malePopulation: data,
 });
 
+const FemalePopulationInput = ({ data }) => ({
+	femalePopulation: data,
+});
+
 const actions = {
 	LocationInput,
 	AddPopulation,
 	TotalPopulationInput,
 	MalePopulationInput,
+	FemalePopulationInput,
 };
 
 export default actions;
