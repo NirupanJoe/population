@@ -5,7 +5,7 @@ const LocationInput = ({ data }) => ({
 });
 
 const AddPopulation = (context) => ({
-	population: Population.addPopulation({ ...context, data: [context.data] }),
+	populations: Population.addPopulation({ ...context, data: [context.data] }),
 	location: '',
 	totalPopulation: '',
 	malePopulation: '',
@@ -25,7 +25,7 @@ const FemalePopulationInput = ({ data }) => ({
 });
 
 const UpdatePopulation = ({ data }) => ({
-	population: data,
+	populations: data,
 });
 
 const actions = {

@@ -17,7 +17,7 @@ test('TotalPopulation render', () => {
 	expect(component).toBeInTheDocument();
 });
 
-test('Location fireEvent', () => {
+test('onchange fireEvent', () => {
 	const component = render(TotalPopulation()).getByRole('totalPopulation');
 
 	fireEvent.change(component, { target: { value: '5' }});

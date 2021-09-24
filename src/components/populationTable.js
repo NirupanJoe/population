@@ -12,7 +12,7 @@ const PopulationTable = () =>
 			</tr>
 		</thead>
 		<tbody role="tableBody">
-			{Container(context.state.population, PopulationTableBody)}
+			{Container(context.state.populations, PopulationTableBody)}
 		</tbody>
 	</table>;
 

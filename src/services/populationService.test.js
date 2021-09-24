@@ -6,10 +6,10 @@ describe('PopulationService', () => {
 
 	test('AddPopulation return concat list', () => {
 		const state = {
-			population: [Symbol('population')],
+			populations: [Symbol('populations')],
 		};
 		const data = [Symbol('data')];
-		const expected = [...state.population, ...data];
+		const expected = [...state.populations, ...data];
 
 		const result = addPopulation({ state, data });
 

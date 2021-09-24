@@ -1,5 +1,5 @@
 const Population = {
-	addPopulation: ({ state, data }) => [...state.population, ...data],
+	addPopulation: ({ state, data }) => [...state.populations, ...data],
 
 	isActive: ({ state }) =>
 		state.location === ''

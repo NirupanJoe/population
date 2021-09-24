@@ -20,7 +20,7 @@ describe('Actions', () => {
 			['totalPopulation', TotalPopulationInput],
 			['malePopulation', MalePopulationInput],
 			['femalePopulation', FemalePopulationInput],
-			['population', UpdatePopulation],
+			['populations', UpdatePopulation],
 		];
 
 		test.each(expectations)('%p update data in state', (key, fn) => {
@@ -44,7 +44,7 @@ describe('Actions', () => {
 		expect(Population.addPopulation)
 			.toHaveBeenCalledWith({ ...context, data: [context.data] });
 		expect(result).toMatchObject({
-			population: returnValue,
+			populations: returnValue,
 			location: '',
 			totalPopulation: '',
 			malePopulation: '',

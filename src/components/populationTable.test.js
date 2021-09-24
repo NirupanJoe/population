@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 jest.mock('../core/context', () => ({
-	state: { population: Symbol('population') },
+	state: { populations: Symbol('populations') },
 	config: { tableTitle: Symbol('tableTitle') },
 }));
 
@@ -29,5 +29,5 @@ test('PopulationTable return table', () => {
 	expect(Container.default)
 		.toHaveBeenCalledWith(context.config.tableTitle, PopulationTableHead);
 	expect(Container.default)
-		.toHaveBeenCalledWith(context.state.population, PopulationTableBody);
+		.toHaveBeenCalledWith(context.state.populations, PopulationTableBody);
 });

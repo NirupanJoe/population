@@ -1,6 +1,6 @@
 const seed = {
 	location: '',
-	population: [],
+	populations: [],
 	totalPopulation: '',
 	malePopulation: '',
 	femalePopulation: '',
