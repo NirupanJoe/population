@@ -26,6 +26,12 @@ const Remote = {
 
 		result && context.actions.AddPopulation(result.data);
 	},
+
+	removePopulation: async (id) => {
+		await axios.delete(`${ context.config.localhostURL }/${ id }`);
+
+		context.actions.RemovePopulation(id);
+	},
 };
 
 export default Remote;

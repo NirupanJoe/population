@@ -10,11 +10,15 @@ describe('Actions', () => {
 		MalePopulationInput,
 		FemalePopulationInput,
 		UpdatePopulation,
+		RemovePopulation,
 	} = Actions;
 	const returnValue = Symbol('returnValue');
+	const data = Symbol('data');
+	const context = {
+		data,
+	};
 
 	describe('update input data', () => {
-		const data = Symbol('data');
 		const expectations = [
 			['location', LocationInput],
 			['totalPopulation', TotalPopulationInput],
@@ -33,10 +37,6 @@ describe('Actions', () => {
 	});
 
 	test('AddPopulation', () => {
-		const context = {
-			data: Symbol('data'),
-		};
-
 		jest.spyOn(Population, 'addPopulation').mockReturnValue(returnValue);
 
 		const result = AddPopulation(context);
@@ -49,6 +49,16 @@ describe('Actions', () => {
 			totalPopulation: '',
 			malePopulation: '',
 			femalePopulation: '',
+		});
+	});
+
+	test('RemovePopulation', () => {
+		jest.spyOn(Population, 'removePopulation').mockReturnValue(returnValue);
+
+		const result = RemovePopulation(context);
+
+		expect(result).toMatchObject({
+			populations: returnValue,
 		});
 	});
 });

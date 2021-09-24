@@ -8,6 +8,7 @@ describe('Remote', () => {
 	const {
 		fetchPopulation,
 		addPopulation,
+		removePopulation,
 	} = Remote;
 	const data = Symbol('data');
 	const result = { data };
@@ -49,8 +50,22 @@ describe('Remote', () => {
 				expect(Population.isActive).toHaveBeenCalledWith(context);
 				!isActive && expect(axios.post)
 					.toHaveBeenCalledWith(config.localhostURL, { ...state })
-				&& expect(context.actions.AddPopulation)
-					.toHaveBeenCalledWith(result.data);
+					&& expect(context.actions.AddPopulation)
+						.toHaveBeenCalledWith(result.data);
 			});
+	});
+
+	test('removePopulation', async () => {
+		const id = 'id';
+
+		jest.spyOn(axios, 'delete');
+		jest.spyOn(context.actions, 'RemovePopulation').mockReturnValue();
+
+		await removePopulation(id);
+
+		expect(axios.delete)
+			.toHaveBeenCalledWith(`${ context.config.localhostURL }/${ id }`);
+		expect(context.actions.RemovePopulation)
+			.toHaveBeenCalledWith(id);
 	});
 });

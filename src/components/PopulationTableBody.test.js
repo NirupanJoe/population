@@ -1,28 +1,47 @@
 /* eslint-disable max-statements */
+/* eslint-disable max-lines-per-function */
 
+import { React } from 'react';
 import { render } from '@testing-library/react';
 import PopulationTableBody from './populationTableBody';
+import * as RemoveButton from './removeButton';
 
-test('PopulationTableBody return the table data', () => {
+describe('PopulationTableBody', () => {
 	const id = 'id';
 	const location = 'location';
 	const totalPopulation = 'totalPopulation';
 	const malePopulation = 'malePopulation';
 	const femalePopulation = 'femalePopulation';
 
-	const { getByRole } = render(PopulationTableBody({
-		id, location, totalPopulation, malePopulation, femalePopulation,
-	}));
-	const component = getByRole('populationTableBody');
+	test('PopulationTableBody return the table', () => {
+		const { getByRole } = render(PopulationTableBody({
+			id, location, totalPopulation, malePopulation, femalePopulation,
+		}));
+		const component = getByRole('populationTableBody');
 
-	expect(component).toBeInTheDocument();
-	expect(getByRole('location')).toBeInTheDocument();
-	expect(getByRole('totalPopulation')).toBeInTheDocument();
-	expect(getByRole('malePopulation')).toBeInTheDocument();
-	expect(getByRole('femalePopulation')).toBeInTheDocument();
+		expect(component).toBeInTheDocument();
+		expect(getByRole('location')).toBeInTheDocument();
+		expect(getByRole('totalPopulation')).toBeInTheDocument();
+		expect(getByRole('malePopulation')).toBeInTheDocument();
+		expect(getByRole('femalePopulation')).toBeInTheDocument();
 
-	expect(getByRole('location')).toHaveTextContent(location);
-	expect(getByRole('totalPopulation')).toHaveTextContent(totalPopulation);
-	expect(getByRole('malePopulation')).toHaveTextContent(malePopulation);
-	expect(getByRole('femalePopulation')).toHaveTextContent(femalePopulation);
+		expect(getByRole('location')).toHaveTextContent(location);
+		expect(getByRole('totalPopulation')).toHaveTextContent(totalPopulation);
+		expect(getByRole('malePopulation')).toHaveTextContent(malePopulation);
+		expect(getByRole('femalePopulation'))
+			.toHaveTextContent(femalePopulation);
+	});
+
+	test('removePopulation in table', () => {
+		jest.spyOn(RemoveButton, 'default')
+			.mockReturnValue(<button role="removeButton"/>);
+
+		const { getByRole } = render(PopulationTableBody({
+			id, location, totalPopulation, malePopulation, femalePopulation,
+		}));
+
+		expect(getByRole('removePopulation')).toBeInTheDocument();
+		expect(getByRole('removeButton')).toBeInTheDocument();
+		expect(RemoveButton.default).toHaveBeenCalledWith(id);
+	});
 });

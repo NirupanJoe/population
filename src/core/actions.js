@@ -28,6 +28,11 @@ const UpdatePopulation = ({ data }) => ({
 	populations: data,
 });
 
+const RemovePopulation = (context) => ({
+	populations: Population
+		.removePopulation({ ...context, data: context.data }),
+});
+
 const actions = {
 	LocationInput,
 	AddPopulation,
@@ -35,6 +40,7 @@ const actions = {
 	MalePopulationInput,
 	FemalePopulationInput,
 	UpdatePopulation,
+	RemovePopulation,
 };
 
 export default actions;

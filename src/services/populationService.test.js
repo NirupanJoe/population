@@ -2,13 +2,13 @@
 import Population from './populationService';
 
 describe('PopulationService', () => {
-	const { addPopulation, isActive } = Population;
+	const { addPopulation, isActive, removePopulation } = Population;
 
 	test('AddPopulation return concat list', () => {
+		const data = [Symbol('data')];
 		const state = {
 			populations: [Symbol('populations')],
 		};
-		const data = [Symbol('data')];
 		const expected = [...state.populations, ...data];
 
 		const result = addPopulation({ state, data });
@@ -37,5 +37,18 @@ describe('PopulationService', () => {
 
 			expect(result).toEqual(hasActive);
 		});
+	});
+
+	test('removePopulation remove the given id in populations', () => {
+		const data = Symbol('data');
+		const state = {
+			populations: [{
+				id: data,
+			}],
+		};
+
+		const result = removePopulation({ state, data });
+
+		expect(result).toEqual([]);
 	});
 });

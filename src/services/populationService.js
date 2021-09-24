@@ -6,6 +6,9 @@ const Population = {
 		|| state.totalPopulation === ''
 		|| state.malePopulation === ''
 		|| state.femalePopulation === '',
+
+	removePopulation: ({ state, data }) =>
+		state.populations.filter((population) => population.id !== data),
 };
 
 export default Population;
