@@ -4,7 +4,7 @@ import Population from './populationService';
 describe('PopulationService', () => {
 	const { addPopulation, isActive, removePopulation } = Population;
 
-	test('AddPopulation return concat list', () => {
+	test('addPopulation return concat list', () => {
 		const data = [Symbol('data')];
 		const state = {
 			populations: [Symbol('populations')],

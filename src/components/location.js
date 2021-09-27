@@ -6,7 +6,7 @@ const Location = () =>
 		role="location"
 		value={ context.state.location }
 		onChange={ (evt) => context.actions
-			.LocationInput(evt.target.value) }
+			.setLocation(evt.target.value) }
 	/>;
 
 export default Location;

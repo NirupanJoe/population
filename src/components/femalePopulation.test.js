@@ -3,7 +3,7 @@ jest.mock('../core/context', () => ({
 		femalePopulation: '',
 	},
 	actions: {
-		FemalePopulationInput: jest.fn(),
+		setFemalePopulation: jest.fn(),
 	},
 }));
 
@@ -22,5 +22,5 @@ test('onchange fireEvent', () => {
 
 	fireEvent.change(component, { target: { value: '3' }});
 
-	expect(context.actions.FemalePopulationInput).toHaveBeenCalledWith('3');
+	expect(context.actions.setFemalePopulation).toHaveBeenCalledWith('3');
 });

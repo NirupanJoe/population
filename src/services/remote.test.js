@@ -15,13 +15,13 @@ describe('Remote', () => {
 
 	test('fetchPopulation', async () => {
 		jest.spyOn(axios, 'get').mockReturnValue(result);
-		jest.spyOn(context.actions, 'UpdatePopulation');
+		jest.spyOn(context.actions, 'updatePopulation');
 
 		await fetchPopulation();
 
 		expect(axios.get)
 			.toHaveBeenCalledWith(context.config.localhostURL);
-		expect(context.actions.UpdatePopulation)
+		expect(context.actions.updatePopulation)
 			.toHaveBeenCalledWith(result.data);
 	});
 
@@ -43,14 +43,14 @@ describe('Remote', () => {
 
 				jest.spyOn(Population, 'isActive').mockReturnValue(isActive);
 				!isActive && jest.spyOn(axios, 'post').mockReturnValue(result);
-				jest.spyOn(context.actions, 'AddPopulation').mockReturnValue();
+				jest.spyOn(context.actions, 'addPopulation').mockReturnValue();
 
 				await addPopulation({ state });
 
 				expect(Population.isActive).toHaveBeenCalledWith(context);
 				!isActive && expect(axios.post)
 					.toHaveBeenCalledWith(config.localhostURL, { ...state })
-					&& expect(context.actions.AddPopulation)
+					&& expect(context.actions.addPopulation)
 						.toHaveBeenCalledWith(result.data);
 			});
 	});
@@ -59,13 +59,13 @@ describe('Remote', () => {
 		const id = 'id';
 
 		jest.spyOn(axios, 'delete').mockReturnValue();
-		jest.spyOn(context.actions, 'RemovePopulation').mockReturnValue();
+		jest.spyOn(context.actions, 'removePopulation').mockReturnValue();
 
 		await removePopulation(id);
 
 		expect(axios.delete)
 			.toHaveBeenCalledWith(`${ context.config.localhostURL }/${ id }`);
-		expect(context.actions.RemovePopulation)
+		expect(context.actions.removePopulation)
 			.toHaveBeenCalledWith(id);
 	});
 });

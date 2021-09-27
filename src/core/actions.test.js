@@ -4,13 +4,13 @@ import Actions from './actions';
 
 describe('Actions', () => {
 	const {
-		LocationInput,
-		AddPopulation,
-		TotalPopulationInput,
-		MalePopulationInput,
-		FemalePopulationInput,
-		UpdatePopulation,
-		RemovePopulation,
+		setLocation,
+		addPopulation,
+		setTotalPopulation,
+		setMalePopulation,
+		setFemalePopulation,
+		updatePopulation,
+		removePopulation,
 	} = Actions;
 	const returnValue = Symbol('returnValue');
 	const data = Symbol('data');
@@ -20,11 +20,11 @@ describe('Actions', () => {
 
 	describe('update input data', () => {
 		const expectations = [
-			['location', LocationInput],
-			['totalPopulation', TotalPopulationInput],
-			['malePopulation', MalePopulationInput],
-			['femalePopulation', FemalePopulationInput],
-			['populations', UpdatePopulation],
+			['location', setLocation],
+			['totalPopulation', setTotalPopulation],
+			['malePopulation', setMalePopulation],
+			['femalePopulation', setFemalePopulation],
+			['populations', updatePopulation],
 		];
 
 		test.each(expectations)('%p update data in state', (key, fn) => {
@@ -36,10 +36,10 @@ describe('Actions', () => {
 		});
 	});
 
-	test('AddPopulation', () => {
+	test('addPopulation', () => {
 		jest.spyOn(Population, 'addPopulation').mockReturnValue(returnValue);
 
-		const result = AddPopulation(context);
+		const result = addPopulation(context);
 
 		expect(Population.addPopulation)
 			.toHaveBeenCalledWith({ ...context, data: [context.data] });
@@ -52,10 +52,10 @@ describe('Actions', () => {
 		});
 	});
 
-	test('RemovePopulation', () => {
+	test('removePopulation', () => {
 		jest.spyOn(Population, 'removePopulation').mockReturnValue(returnValue);
 
-		const result = RemovePopulation(context);
+		const result = removePopulation(context);
 
 		expect(result).toMatchObject({
 			populations: returnValue,

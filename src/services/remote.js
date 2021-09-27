@@ -3,12 +3,14 @@ import context from '../core/context';
 import PopulationService from './populationService';
 
 const Remote = {
+	// oneLine
 	fetchPopulation: async () => {
 		const result = await axios.get(context.config.localhostURL);
 
-		context.actions.UpdatePopulation(result.data);
+		context.actions.updatePopulation(result.data);
 	},
 
+	// oneLine
 	addPopulation: async ({ state }) => {
 		const {
 			location,
@@ -24,13 +26,13 @@ const Remote = {
 				femalePopulation,
 			});
 
-		result && context.actions.AddPopulation(result.data);
+		result && context.actions.addPopulation(result.data);
 	},
 
 	removePopulation: async (id) => {
 		await axios.delete(`${ context.config.localhostURL }/${ id }`);
 
-		context.actions.RemovePopulation(id);
+		context.actions.removePopulation(id);
 	},
 };
 

@@ -1,10 +1,10 @@
 import Population from '../services/populationService';
 
-const LocationInput = ({ data }) => ({
+const setLocation = ({ data }) => ({
 	location: data,
 });
 
-const AddPopulation = (context) => ({
+const addPopulation = (context) => ({
 	populations: Population.addPopulation({ ...context, data: [context.data] }),
 	location: '',
 	totalPopulation: '',
@@ -12,35 +12,35 @@ const AddPopulation = (context) => ({
 	femalePopulation: '',
 });
 
-const TotalPopulationInput = ({ data }) => ({
+const setTotalPopulation = ({ data }) => ({
 	totalPopulation: data,
 });
 
-const MalePopulationInput = ({ data }) => ({
+const setMalePopulation = ({ data }) => ({
 	malePopulation: data,
 });
 
-const FemalePopulationInput = ({ data }) => ({
+const setFemalePopulation = ({ data }) => ({
 	femalePopulation: data,
 });
 
-const UpdatePopulation = ({ data }) => ({
+const updatePopulation = ({ data }) => ({
 	populations: data,
 });
 
-const RemovePopulation = (context) => ({
+const removePopulation = (context) => ({
 	populations: Population
 		.removePopulation({ ...context, data: context.data }),
 });
 
 const actions = {
-	LocationInput,
-	AddPopulation,
-	TotalPopulationInput,
-	MalePopulationInput,
-	FemalePopulationInput,
-	UpdatePopulation,
-	RemovePopulation,
+	setLocation,
+	addPopulation,
+	setTotalPopulation,
+	setMalePopulation,
+	setFemalePopulation,
+	updatePopulation,
+	removePopulation,
 };
 
 export default actions;

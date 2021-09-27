@@ -3,7 +3,7 @@ jest.mock('../core/context', () => ({
 		location: '',
 	},
 	actions: {
-		LocationInput: jest.fn(),
+		setLocation: jest.fn(),
 	},
 }));
 
@@ -23,6 +23,6 @@ describe('Location', () => {
 
 		fireEvent.change(component, { target: { value: 'city' }});
 
-		expect(context.actions.LocationInput).toHaveBeenCalledWith('city');
+		expect(context.actions.setLocation).toHaveBeenCalledWith('city');
 	});
 });

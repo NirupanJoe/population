@@ -7,7 +7,7 @@ const TotalPopulation = () =>
 		type="number"
 		value={ context.state.totalPopulation }
 		onChange={ (evt) => context.actions
-			.TotalPopulationInput(evt.target.value) }
+			.setTotalPopulation(evt.target.value) }
 	/>;
 
 export default TotalPopulation;

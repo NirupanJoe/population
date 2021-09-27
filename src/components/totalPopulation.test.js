@@ -3,7 +3,7 @@ jest.mock('../core/context', () => ({
 		totalPopulation: '',
 	},
 	actions: {
-		TotalPopulationInput: jest.fn(),
+		setTotalPopulation: jest.fn(),
 	},
 }));
 
@@ -22,5 +22,5 @@ test('onchange fireEvent', () => {
 
 	fireEvent.change(component, { target: { value: '5' }});
 
-	expect(context.actions.TotalPopulationInput).toHaveBeenCalledWith('5');
+	expect(context.actions.setTotalPopulation).toHaveBeenCalledWith('5');
 });

@@ -7,7 +7,7 @@ const MalePopulation = () =>
 		type="number"
 		value={ context.state.malePopulation }
 		onChange={ (evt) => context.actions
-			.MalePopulationInput(evt.target.value) }
+			.setMalePopulation(evt.target.value) }
 	/>;
 
 export default MalePopulation;
