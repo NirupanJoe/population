@@ -58,7 +58,7 @@ describe('Remote', () => {
 	test('removePopulation', async () => {
 		const id = 'id';
 
-		jest.spyOn(axios, 'delete');
+		jest.spyOn(axios, 'delete').mockReturnValue();
 		jest.spyOn(context.actions, 'RemovePopulation').mockReturnValue();
 
 		await removePopulation(id);
