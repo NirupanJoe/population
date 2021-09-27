@@ -5,24 +5,24 @@ import Population from './populationService';
 import Remote from './remote';
 
 describe('Remote', () => {
+	const { config } = context;
 	const {
 		fetchPopulation,
 		addPopulation,
 		removePopulation,
 	} = Remote;
 	const data = Symbol('data');
-	const result = { data };
+	const returnValue = { data };
 
 	test('fetchPopulation', async () => {
-		jest.spyOn(axios, 'get').mockReturnValue(result);
-		jest.spyOn(context.actions, 'updatePopulation');
+		jest.spyOn(axios, 'get').mockReturnValue(returnValue);
+		jest.spyOn(context.actions, 'updatePopulation').mockReturnValue();
 
 		await fetchPopulation();
 
-		expect(axios.get)
-			.toHaveBeenCalledWith(context.config.localhostURL);
+		expect(axios.get).toHaveBeenCalledWith(config.localhostURL);
 		expect(context.actions.updatePopulation)
-			.toHaveBeenCalledWith(result.data);
+			.toHaveBeenCalledWith(returnValue.data);
 	});
 
 	describe('addPopulation', () => {
@@ -30,19 +30,17 @@ describe('Remote', () => {
 			['not add', true],
 			['add', false],
 		];
-		const { config } = context;
+		const state = {
+			location: Symbol(''),
+			totalPopulation: Symbol(''),
+			malePopulation: Symbol(''),
+			femalePopulation: Symbol(''),
+		};
 
 		test.each(expectations)('%p the population when isActive return %p',
 			async (dummy, isActive) => {
-				const state = {
-					location: Symbol(''),
-					totalPopulation: Symbol(''),
-					malePopulation: Symbol(''),
-					femalePopulation: Symbol(''),
-				};
-
 				jest.spyOn(Population, 'isActive').mockReturnValue(isActive);
-				!isActive && jest.spyOn(axios, 'post').mockReturnValue(result);
+				jest.spyOn(axios, 'post').mockReturnValue(returnValue);
 				jest.spyOn(context.actions, 'addPopulation').mockReturnValue();
 
 				await addPopulation({ state });
@@ -51,7 +49,7 @@ describe('Remote', () => {
 				!isActive && expect(axios.post)
 					.toHaveBeenCalledWith(config.localhostURL, { ...state })
 					&& expect(context.actions.addPopulation)
-						.toHaveBeenCalledWith(result.data);
+						.toHaveBeenCalledWith(returnValue.data);
 			});
 	});
 
