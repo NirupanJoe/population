@@ -37,16 +37,16 @@ describe('Remote', () => {
 			femalePopulation: Symbol(''),
 		};
 
-		test.each(expectations)('%p the population when isActive return %p',
-			async (dummy, isActive) => {
-				jest.spyOn(Population, 'isActive').mockReturnValue(isActive);
+		test.each(expectations)('%p the population when isValid return %p',
+			async (dummy, isValid) => {
+				jest.spyOn(Population, 'isValid').mockReturnValue(isValid);
 				jest.spyOn(axios, 'post').mockReturnValue(returnValue);
 				jest.spyOn(context.actions, 'addPopulation').mockReturnValue();
 
 				await addPopulation({ state });
 
-				expect(Population.isActive).toHaveBeenCalledWith(context);
-				!isActive && expect(axios.post)
+				expect(Population.isValid).toHaveBeenCalledWith(context);
+				!isValid && expect(axios.post)
 					.toHaveBeenCalledWith(config.localhostURL, { ...state })
 					&& expect(context.actions.addPopulation)
 						.toHaveBeenCalledWith(returnValue.data);

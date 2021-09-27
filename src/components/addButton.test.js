@@ -10,13 +10,13 @@ describe('AddButton', () => {
 		['not disable', false],
 	];
 
-	test.each(expectations)('AddButton %p when isActive is %p',
-		(dummy, isActive) => {
-			jest.spyOn(Population, 'isActive').mockReturnValue(isActive);
+	test.each(expectations)('AddButton %p when isValid is %p',
+		(dummy, isValid) => {
+			jest.spyOn(Population, 'isValid').mockReturnValue(isValid);
 
 			const component = render(AddButton()).getByRole('addButton');
 
-			isActive
+			isValid
 				? expect(component).toBeDisabled()
 				: expect(component).not.toBeDisabled();
 			expect(component).toBeInTheDocument();
@@ -24,7 +24,7 @@ describe('AddButton', () => {
 });
 
 test('fireEvent', () => {
-	jest.spyOn(Population, 'isActive').mockReturnValue(false);
+	jest.spyOn(Population, 'isValid').mockReturnValue(false);
 	jest.spyOn(Remote, 'addPopulation').mockReturnValue();
 
 	const component = render(AddButton()).getByRole('addButton');

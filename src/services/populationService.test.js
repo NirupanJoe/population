@@ -2,7 +2,7 @@
 import Population from './populationService';
 
 describe('PopulationService', () => {
-	const { addPopulation, isActive, removePopulation } = Population;
+	const { addPopulation, isValid, removePopulation } = Population;
 
 	test('addPopulation return concat list', () => {
 		const data = [Symbol('data')];
@@ -16,7 +16,7 @@ describe('PopulationService', () => {
 		expect(result).toEqual(expected);
 	});
 
-	describe('isActive', () => {
+	describe('isValid', () => {
 		const expectations = [
 			[false, 'a', 'a', '5', '3'],
 			[true, '', '', '', ''],
@@ -28,7 +28,7 @@ describe('PopulationService', () => {
 			hasActive, location, totalPopulation, malePopulation,
 			femalePopulation
 		) => {
-			const result = isActive({ state: {
+			const result = isValid({ state: {
 				location,
 				totalPopulation,
 				malePopulation,

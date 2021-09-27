@@ -6,7 +6,7 @@ import Remote from '../services/remote';
 const AddButton = () =>
 	<button
 		role="addButton"
-		disabled={ Population.isActive(context) }
+		disabled={ Population.isValid(context) }
 		onClick={ () => Remote.addPopulation(context) }
 	>
 		Add

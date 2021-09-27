@@ -8,9 +8,8 @@ const Remote = {
 		context.actions.updatePopulation((await axios
 			.get(context.config.localhostURL)).data),
 
-	// rename isActive
 	addPopulation: async ({ state }) =>
-		!PopulationService.isActive(context) && context.actions
+		!PopulationService.isValid(context) && context.actions
 			.addPopulation((await axios.post(context.config.localhostURL, {
 				...state,
 			})).data),
