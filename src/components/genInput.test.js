@@ -31,5 +31,6 @@ test('onChange fireEvent', () => {
 	fireEvent.change(component, { target: { value: data.name }});
 
 	expect(component).toBeInTheDocument();
+	expect(component).toHaveAttribute('type', data.type);
 	expect(context.actions[`set${ data.name }`]).toHaveBeenCalledWith(data.name);
 });
