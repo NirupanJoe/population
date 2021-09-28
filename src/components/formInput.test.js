@@ -1,33 +1,18 @@
 import { React } from 'react';
 import { render } from '@testing-library/react';
 import FormInput from './formInput';
-import * as Location from './location';
-import * as MalePopulation from './malePopulation';
-import * as FemalePopulation from './femalePopulation';
-import * as TotalPopulation from './totalPopulation';
+import * as Container from './container';
+import context from '../core/context';
+import Input from './input';
 
-const expectations = [
-	['location', Location],
-	['malePopulation', MalePopulation],
-	['femalePopulation', FemalePopulation],
-	['totalPopulation', TotalPopulation],
-];
-
-test.each(expectations)('formInput render %p', (role, component) => {
-	jest.spyOn(Location, 'default').mockReturnValue(<div role="location"/>);
-	jest.spyOn(MalePopulation, 'default')
-		.mockReturnValue(<div role="malePopulation"/>);
-	jest.spyOn(FemalePopulation, 'default')
-		.mockReturnValue(<div role="femalePopulation"/>);
-	jest.spyOn(TotalPopulation, 'default')
-		.mockReturnValue(<div role="totalPopulation"/>);
+test('formInput render ', () => {
+	jest.spyOn(Container, 'default').mockReturnValue(<div role="input"/>);
 
 	const { getByRole } = render(FormInput());
+	const component = getByRole('formInput');
 
-	expect(getByRole('formInput')).toBeInTheDocument();
-	expect(getByRole(role)).toBeInTheDocument();
-	expect(component.default).toBeCalledWith();
-	expect(getByRole('formInput')).toHaveClass('form-input');
-	expect(getByRole('formInput')).toHaveTextContent('Location:MalePopulation'
-	+ ':FemalePopulation:TotalPopulation');
+	expect(component).toBeInTheDocument();
+	expect(getByRole('input')).toBeInTheDocument();
+	expect(Container.default).toBeCalledWith(context.config.input, Input);
+	expect(component).toHaveClass('form-input');
 });

@@ -1,15 +1,11 @@
 import { React } from 'react';
-import Location from './location';
-import TotalPopulation from './totalPopulation';
-import MalePopulation from './malePopulation';
-import FemalePopulation from './femalePopulation';
+import context from '../core/context';
+import Container from './container';
+import Input from './input';
 
 const FormInput = () =>
 	<div role="formInput" className="form-input">
-		Location:{ Location() }
-		MalePopulation:{ MalePopulation()}
-		FemalePopulation:{ FemalePopulation()}
-		TotalPopulation:{ TotalPopulation() }
+		{Container(context.config.input, Input)}
 	</div>;
 
 export default FormInput;
