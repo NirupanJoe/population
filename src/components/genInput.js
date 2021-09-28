@@ -1,12 +1,12 @@
 import { React } from 'react';
 import context from '../core/context';
 
-const Input = (data, key) => {
+const GenInput = (data, key) => {
 	const { name, type } = data;
 	const updateName = name[0].toLowerCase() + name.slice(1);
 
 	return (
-		<label key={ key } role="input">
+		<label key={ key } role="genInput">
 			<div role={ name }>{name}</div>
 			<input
 				placeholder={ name }
@@ -18,4 +18,4 @@ const Input = (data, key) => {
 	);
 };
 
-export default Input;
+export default GenInput;

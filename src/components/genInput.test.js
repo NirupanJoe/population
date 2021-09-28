@@ -9,16 +9,16 @@ jest.mock('../core/context', () => ({
 
 import { render, fireEvent } from '@testing-library/react';
 import context from '../core/context';
-import Input from './input';
+import GenInput from './genInput';
 
 const data = {
 	name: 'Name',
 	type: 'type',
 };
 
-test('Input render', () => {
-	const { getByRole } = render(Input(data));
-	const component = getByRole('input');
+test('GenInput render', () => {
+	const { getByRole } = render(GenInput(data));
+	const component = getByRole('genInput');
 
 	expect(component).toBeInTheDocument();
 	expect(getByRole(data.name)).toBeInTheDocument();
@@ -26,7 +26,7 @@ test('Input render', () => {
 });
 
 test('onChange fireEvent', () => {
-	const component = render(Input(data)).queryByPlaceholderText(data.name);
+	const component = render(GenInput(data)).queryByPlaceholderText(data.name);
 
 	fireEvent.change(component, { target: { value: data.name }});
 

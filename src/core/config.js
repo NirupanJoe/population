@@ -5,7 +5,7 @@ const config = {
 		'MalePopulation',
 		'FemalePopulation',
 	],
-	input: [
+	genInput: [
 		{
 			name: 'Location',
 			type: 'text',
