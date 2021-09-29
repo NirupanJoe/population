@@ -11,7 +11,10 @@ const Remote = {
 	addPopulation: async ({ state }) =>
 		!PopulationService.isValid(context) && context.actions
 			.addPopulation((await axios.post(context.config.localhostURL, {
-				...state,
+				location: state.location,
+				malePopulation: state.malePopulation,
+				femalePopulation: state.femalePopulation,
+				totalPopulation: state.totalPopulation,
 			})).data),
 
 	removePopulation: async (id) => {
