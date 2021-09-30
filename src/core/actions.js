@@ -5,12 +5,7 @@ const setLocation = ({ data }) => ({
 });
 
 const addPopulation = (context) => ({
-	// TODO: Remove the unnecessary array.
-	populations: Population.addPopulation({ ...context, data: [context.data] }),
-	location: '',
-	totalPopulation: '',
-	malePopulation: '',
-	femalePopulation: '',
+	populations: Population.addPopulation({ ...context, data: context.data }),
 });
 
 const setTotalPopulation = ({ data }) => ({
@@ -34,6 +29,13 @@ const removePopulation = (context) => ({
 		.removePopulation({ ...context, data: context.data }),
 });
 
+const resetInput = () => ({
+	location: '',
+	totalPopulation: '',
+	malePopulation: '',
+	femalePopulation: '',
+});
+
 const actions = {
 	setLocation,
 	addPopulation,
@@ -42,6 +44,7 @@ const actions = {
 	setFemalePopulation,
 	updatePopulation,
 	removePopulation,
+	resetInput,
 };
 
 export default actions;

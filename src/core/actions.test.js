@@ -11,6 +11,7 @@ describe('Actions', () => {
 		setFemalePopulation,
 		updatePopulation,
 		removePopulation,
+		resetInput,
 	} = Actions;
 	const returnValue = Symbol('returnValue');
 	const data = Symbol('data');
@@ -35,32 +36,33 @@ describe('Actions', () => {
 			});
 		});
 	});
+	describe('addPopulation and removePopulation', () => {
+		const expectations = [
+			['addPopulation', addPopulation],
+			['removePopulation', removePopulation],
+		];
 
-	test('addPopulation', () => {
-		jest.spyOn(Population, 'addPopulation').mockReturnValue(returnValue);
+		test.each(expectations)('%p', (service, fn) => {
+			jest.spyOn(Population, service).mockReturnValue(returnValue);
 
-		const result = addPopulation(context);
+			const result = fn(context);
 
-		expect(Population.addPopulation)
-			.toHaveBeenCalledWith({ ...context, data: [context.data] });
+			expect(Population[service])
+				.toHaveBeenCalledWith({ ...context, data: context.data });
+			expect(result).toMatchObject({
+				populations: returnValue,
+			});
+		});
+	});
+
+	test('resetInput', () => {
+		const result = resetInput();
+
 		expect(result).toMatchObject({
-			populations: returnValue,
-			// TODO: Remove the unnecessary keys.
 			location: '',
 			totalPopulation: '',
 			malePopulation: '',
 			femalePopulation: '',
-		});
-	});
-
-	test('removePopulation', () => {
-		jest.spyOn(Population, 'removePopulation').mockReturnValue(returnValue);
-		// TODO: Test toHaveBeenCalledWith.
-
-		const result = removePopulation(context);
-
-		expect(result).toMatchObject({
-			populations: returnValue,
 		});
 	});
 });

@@ -9,7 +9,7 @@ describe('PopulationService', () => {
 		const state = {
 			populations: [Symbol('populations')],
 		};
-		const expected = [...state.populations, ...data];
+		const expected = [...state.populations, [...data]];
 
 		const result = addPopulation({ state, data });
 

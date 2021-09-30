@@ -1,5 +1,5 @@
 const Population = {
-	addPopulation: ({ state, data }) => [...state.populations, ...data],
+	addPopulation: ({ state, data }) => [...state.populations, [...data]],
 
 	// TODO: Use array.includes.
 	isValid: ({ state }) =>
