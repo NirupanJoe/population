@@ -17,6 +17,8 @@ describe('PopulationService', () => {
 	});
 
 	describe('isValid', () => {
+		// TODO: Use randomStrings.
+		// TODO: Only two cases are needed, all full and some full.
 		const expectations = [
 			[false, 'a', 'a', '5', '3'],
 			[true, '', '', '', ''],
@@ -40,6 +42,8 @@ describe('PopulationService', () => {
 	});
 
 	test('removePopulation remove the given id in populations', () => {
+		// TODO: Randomize tests.
+		// TODO: Test for failure case.
 		const data = Symbol('data');
 		const state = {
 			populations: [{

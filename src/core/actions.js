@@ -5,6 +5,7 @@ const setLocation = ({ data }) => ({
 });
 
 const addPopulation = (context) => ({
+	// TODO: Remove the unnecessary array.
 	populations: Population.addPopulation({ ...context, data: [context.data] }),
 	location: '',
 	totalPopulation: '',

@@ -16,6 +16,7 @@ describe('AddButton', () => {
 
 			const component = render(AddButton()).getByRole('addButton');
 
+			// TODO: Check for the property, component.disabled.
 			isValid
 				? expect(component).toBeDisabled()
 				: expect(component).not.toBeDisabled();

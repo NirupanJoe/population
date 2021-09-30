@@ -9,6 +9,7 @@ const Remote = {
 			.get(context.config.localhostURL)).data),
 
 	addPopulation: async ({ state }) =>
+			// TODO: Move the logic to populationService.
 		!PopulationService.isValid(context) && context.actions
 			.addPopulation((await axios.post(context.config.localhostURL, {
 				location: state.location,

@@ -12,6 +12,7 @@ test('formInput render ', () => {
 	const component = getByRole('formInput');
 
 	expect(component).toBeInTheDocument();
+	// TODO: Mock getInput.
 	expect(getByRole('genInput')).toBeInTheDocument();
 	expect(Container.default).toBeCalledWith(context.config.genInput, GenInput);
 	expect(component).toHaveClass('form-input');

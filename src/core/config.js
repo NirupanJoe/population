@@ -5,6 +5,7 @@ const config = {
 		'MalePopulation',
 		'FemalePopulation',
 	],
+	// TODO: Use dictionary instead.
 	genInput: [
 		{
 			name: 'Location',

@@ -1,6 +1,7 @@
 import { React } from 'react';
 import RemoveButton from './removeButton';
 
+// TODO: Use CSS grids instead of tables.
 const PopulationTableBody = ({
 	id, location, totalPopulation, malePopulation, femalePopulation,
 }) =>

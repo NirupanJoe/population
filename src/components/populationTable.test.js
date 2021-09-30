@@ -20,12 +20,15 @@ test('PopulationTable return table', () => {
 	const component = getByRole('populationTable');
 
 	expect(component).toBeInTheDocument();
+	// TODO: Use forEach.
 	expect(getByRole('tableHead')).toBeInTheDocument();
+	// TODO: Test parent-child relationship.
 	expect(getByRole('tableTitle')).toBeInTheDocument();
 	expect(getByRole('tableBody')).toBeInTheDocument();
 	expect(getByRole('populationTableHead')).toBeInTheDocument();
 	expect(getByRole('populationTableBody')).toBeInTheDocument();
 
+	// TODO: Pass context instead.
 	expect(Container.default)
 		.toHaveBeenCalledWith(context.config.tableTitle, PopulationTableHead);
 	expect(Container.default)

@@ -45,6 +45,7 @@ describe('Actions', () => {
 			.toHaveBeenCalledWith({ ...context, data: [context.data] });
 		expect(result).toMatchObject({
 			populations: returnValue,
+			// TODO: Remove the unnecessary keys.
 			location: '',
 			totalPopulation: '',
 			malePopulation: '',
@@ -54,6 +55,7 @@ describe('Actions', () => {
 
 	test('removePopulation', () => {
 		jest.spyOn(Population, 'removePopulation').mockReturnValue(returnValue);
+		// TODO: Test toHaveBeenCalledWith.
 
 		const result = removePopulation(context);
 
