@@ -1,12 +1,12 @@
 const Population = {
 	addPopulation: ({ state, data }) => state.populations.concat(data),
 
-	// TODO: Use array.includes.
-	isValid: ({ state }) =>
-		state.location === ''
-		|| state.totalPopulation === ''
-		|| state.malePopulation === ''
-		|| state.femalePopulation === '',
+	isValid: ({ state }) => [
+		state.location,
+		state.totalPopulation,
+		state.malePopulation,
+		state.femalePopulation,
+	].includes(''),
 
 	removePopulation: ({ state, data }) =>
 		state.populations.filter((population) => population.id !== data),

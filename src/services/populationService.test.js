@@ -1,5 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import Population from './populationService';
+import { rndString } from '@laufire/utils/random';
 
 describe('PopulationService', () => {
 	const { addPopulation, isValid, removePopulation } = Population;
@@ -17,13 +18,10 @@ describe('PopulationService', () => {
 	});
 
 	describe('isValid', () => {
-		// TODO: Use randomStrings.
-		// TODO: Only two cases are needed, all full and some full.
+		const input = rndString();
 		const expectations = [
-			[false, 'a', 'a', '5', '3'],
-			[true, '', '', '', ''],
-			[true, '', 'a', '', '3'],
-			[true, 'a', '', '5', ''],
+			[false, input, input, input, input],
+			[true, '', input, '', ''],
 		];
 
 		test.each(expectations)('Return %p', (
@@ -53,8 +51,6 @@ describe('PopulationService', () => {
 			(
 				dummy, id, returnValue
 			) => {
-			// TODO: Randomize tests.
-			// TODO: Test for failure case.
 				const populations = [{
 					id,
 				}];
