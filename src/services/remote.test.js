@@ -3,6 +3,7 @@
 import axios from 'axios';
 import context from '../core/context';
 import Remote from './remote';
+import { rndBetween } from '@laufire/utils/random';
 
 describe('Remote', () => {
 	const { config } = context;
@@ -45,16 +46,14 @@ describe('Remote', () => {
 	});
 
 	test('removePopulation', async () => {
-		const id = 'id';
+		const id = rndBetween();
 
 		jest.spyOn(axios, 'delete').mockReturnValue();
 		jest.spyOn(context.actions, 'removePopulation').mockReturnValue();
 
 		await removePopulation(id);
 
-		expect(axios.delete)
-			.toHaveBeenCalledWith(`${ context.config.localhostURL }/${ id }`);
-		expect(context.actions.removePopulation)
-			.toHaveBeenCalledWith(id);
+		expect(axios.delete).toHaveBeenCalledWith(`${ context.config.localhostURL }/${ id }`);
+		expect(context.actions.removePopulation).toHaveBeenCalledWith(id);
 	});
 });
