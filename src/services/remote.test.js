@@ -2,7 +2,6 @@
 
 import axios from 'axios';
 import context from '../core/context';
-import Population from './populationService';
 import Remote from './remote';
 
 describe('Remote', () => {
@@ -26,11 +25,7 @@ describe('Remote', () => {
 			.toHaveBeenCalledWith(returnValue.data);
 	});
 
-	describe('addPopulation', () => {
-		const expectations = [
-			['not add', true],
-			['add', false],
-		];
+	test('addPopulation', async () => {
 		const state = {
 			location: Symbol(''),
 			totalPopulation: Symbol(''),
@@ -38,20 +33,15 @@ describe('Remote', () => {
 			femalePopulation: Symbol(''),
 		};
 
-		test.each(expectations)('%p the population when isValid return %p',
-			async (dummy, isValid) => {
-				jest.spyOn(Population, 'isValid').mockReturnValue(isValid);
-				jest.spyOn(axios, 'post').mockReturnValue(returnValue);
-				jest.spyOn(context.actions, 'addPopulation').mockReturnValue();
+		jest.spyOn(axios, 'post').mockReturnValue(returnValue);
+		jest.spyOn(context.actions, 'addPopulation').mockReturnValue();
 
-				await addPopulation({ state });
+		await addPopulation({ state });
 
-				expect(Population.isValid).toHaveBeenCalledWith(context);
-				!isValid && expect(axios.post)
-					.toHaveBeenCalledWith(config.localhostURL, { ...state })
-					&& expect(context.actions.addPopulation)
-						.toHaveBeenCalledWith(returnValue.data);
-			});
+		expect(axios.post).toHaveBeenCalledWith(config
+			.localhostURL, { ...state });
+		expect(context.actions.addPopulation)
+			.toHaveBeenCalledWith(returnValue.data);
 	});
 
 	test('removePopulation', async () => {

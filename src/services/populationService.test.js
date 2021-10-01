@@ -1,9 +1,16 @@
 /* eslint-disable max-lines-per-function */
 import Population from './populationService';
 import { rndString } from '@laufire/utils/random';
+import context from '../core/context';
+import Remote from './remote';
 
 describe('PopulationService', () => {
-	const { addPopulation, isValid, removePopulation } = Population;
+	const {
+		addPopulation,
+		isValid,
+		removePopulation,
+		createPopulation,
+	} = Population;
 
 	test('addPopulation return concat list', () => {
 		const data = [Symbol('data')];
@@ -62,5 +69,25 @@ describe('PopulationService', () => {
 
 				expect(result).toEqual(returnValue);
 			});
+	});
+
+	describe('createPopulation', () => {
+		const expectations = [
+			[true, 'return false', false],
+			[false, 'call addPopulation', undefined],
+		];
+
+		test.each(expectations)('isValid is %p %p', (
+			hasValid, dummy, expected
+		) => {
+			jest.spyOn(Population, 'isValid').mockReturnValue(hasValid);
+			jest.spyOn(Remote, 'addPopulation').mockReturnValue();
+			const result = createPopulation(context);
+
+			expect(Population.isValid).toHaveBeenCalledWith(context);
+			!hasValid && expect(Remote.addPopulation)
+				.toHaveBeenCalledWith(context);
+			expect(result).toEqual(expected);
+		});
 	});
 });
