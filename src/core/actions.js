@@ -5,7 +5,7 @@ const setLocation = ({ data }) => ({
 });
 
 const addPopulation = (context) => ({
-	populations: Population.addPopulation({ ...context, data: context.data }),
+	populations: Population.addPopulation(context),
 });
 
 const setTotalPopulation = ({ data }) => ({
@@ -26,7 +26,7 @@ const updatePopulation = ({ data }) => ({
 
 const removePopulation = (context) => ({
 	populations: Population
-		.removePopulation({ ...context, data: context.data }),
+		.removePopulation(context),
 });
 
 const resetInput = () => ({

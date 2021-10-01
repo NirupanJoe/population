@@ -1,6 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import Population from '../services/populationService';
 import Actions from './actions';
+import context from './context';
 
 describe('Actions', () => {
 	const {
@@ -15,9 +16,6 @@ describe('Actions', () => {
 	} = Actions;
 	const returnValue = Symbol('returnValue');
 	const data = Symbol('data');
-	const context = {
-		data,
-	};
 
 	describe('update input data', () => {
 		const expectations = [
@@ -48,7 +46,7 @@ describe('Actions', () => {
 			const result = fn(context);
 
 			expect(Population[service])
-				.toHaveBeenCalledWith({ ...context, data: context.data });
+				.toHaveBeenCalledWith(context);
 			expect(result).toMatchObject({
 				populations: returnValue,
 			});

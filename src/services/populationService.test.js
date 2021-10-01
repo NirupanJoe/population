@@ -9,7 +9,7 @@ describe('PopulationService', () => {
 		const state = {
 			populations: [Symbol('populations')],
 		};
-		const expected = [...state.populations, [...data]];
+		const expected = [...state.populations, ...data];
 
 		const result = addPopulation({ state, data });
 
@@ -41,18 +41,30 @@ describe('PopulationService', () => {
 		});
 	});
 
-	test('removePopulation remove the given id in populations', () => {
-		// TODO: Randomize tests.
-		// TODO: Test for failure case.
+	describe('removePopulation', () => {
 		const data = Symbol('data');
-		const state = {
-			populations: [{
-				id: data,
-			}],
-		};
+		const dataOne = Symbol('dataOne');
+		const expectations = [
+			['remove', data, []],
+			['Does not remove', dataOne, [{ id: dataOne }]],
+		];
 
-		const result = removePopulation({ state, data });
+		test.each(expectations)('%p the given id in populations',
+			(
+				dummy, id, returnValue
+			) => {
+			// TODO: Randomize tests.
+			// TODO: Test for failure case.
+				const populations = [{
+					id,
+				}];
+				const state = {
+					populations,
+				};
 
-		expect(result).toEqual([]);
+				const result = removePopulation({ state, data });
+
+				expect(result).toEqual(returnValue);
+			});
 	});
 });
