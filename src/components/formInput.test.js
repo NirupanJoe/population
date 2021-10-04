@@ -5,13 +5,13 @@ jest.mock('./genInput', () => (data) =>
 
 import { React } from 'react';
 import { render } from '@testing-library/react';
-import FormInput from './formInput';
+import InputForm from './formInput';
 import context from '../core/context';
 import * as collection from '@laufire/utils/collection';
 
 // TODO To check toHaveBeenCalledWith for jest.mock
 test('formInput render ', () => {
-	const { getByRole } = render(FormInput());
+	const { getByRole } = render(InputForm());
 	const component = getByRole('formInput');
 
 	collection.map(context.config.inputs, (data) => {
