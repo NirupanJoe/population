@@ -1,11 +1,12 @@
 import { React } from 'react';
 import context from '../core/context';
-import Container from './container';
-import GenInput from './genInput';
+import genInput from './genInput';
+import { values, map } from '@laufire/utils/collection';
 
 const FormInput = () =>
 	<div role="formInput" className="form-input">
-		{Container(context.config.genInput, GenInput)}
+		{ values(map(context.config.inputs, (value) =>
+			genInput(value)(context)))}
 	</div>;
 
 export default FormInput;

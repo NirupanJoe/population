@@ -1,19 +1,23 @@
+/* eslint-disable react/display-name */
+
+jest.mock('./genInput', () => (data) =>
+	jest.fn().mockReturnValue(<div key={ data.label } role={ `${ data.label }Input` }/>));
+
 import { React } from 'react';
 import { render } from '@testing-library/react';
 import FormInput from './formInput';
-import * as Container from './container';
 import context from '../core/context';
-import GenInput from './genInput';
+import * as collection from '@laufire/utils/collection';
 
+// TODO To check toHaveBeenCalledWith for jest.mock
 test('formInput render ', () => {
-	jest.spyOn(Container, 'default').mockReturnValue(<div role="genInput"/>);
-
 	const { getByRole } = render(FormInput());
 	const component = getByRole('formInput');
 
+	collection.map(context.config.inputs, (data) => {
+		expect(getByRole(`${ data.label }Input`)).toBeInTheDocument();
+	});
+
 	expect(component).toBeInTheDocument();
-	// TODO: Mock getInput.
-	expect(getByRole('genInput')).toBeInTheDocument();
-	expect(Container.default).toBeCalledWith(context.config.genInput, GenInput);
 	expect(component).toHaveClass('form-input');
 });

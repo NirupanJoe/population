@@ -5,25 +5,24 @@ const config = {
 		'MalePopulation',
 		'FemalePopulation',
 	],
-	// TODO: Use dictionary instead.
-	genInput: [
-		{
-			name: 'Location',
+	inputs: {
+		location: {
 			type: 'text',
+			label: 'Location',
 		},
-		{
-			name: 'MalePopulation',
+		malePopulation: {
 			type: 'number',
+			label: 'MalePopulation',
 		},
-		{
-			name: 'FemalePopulation',
+		femalePopulation: {
 			type: 'number',
+			label: 'FemalePopulation',
 		},
-		{
-			name: 'TotalPopulation',
+		totalPopulation: {
 			type: 'number',
+			label: 'TotalPopulation',
 		},
-	],
+	},
 	localhostURL: 'http://localhost:5500/population',
 };
 

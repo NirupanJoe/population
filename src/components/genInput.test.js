@@ -1,40 +1,52 @@
+/* eslint-disable max-lines-per-function */
 jest.mock('../core/context', () => ({
 	state: {
 		location: '',
+		malePopulation: '',
+		femalePopulation: '',
+		totalPopulation: '',
 	},
 	actions: {
-		setName: jest.fn(),
+		setLocation: jest.fn(),
+		setMalePopulation: jest.fn(),
+		setFemalePopulation: jest.fn(),
+		setTotalPopulation: jest.fn(),
 	},
 }));
 
 import { render, fireEvent } from '@testing-library/react';
 import context from '../core/context';
-import GenInput from './genInput';
+import genInput from './genInput';
+import { rndBetween, rndString } from '@laufire/utils/random';
+import config from '../core/config';
+import { values } from '@laufire/utils/collection';
 
-// TODO: Use random keys.
-const data = {
-	name: 'Name',
-	type: 'type',
-};
+describe('GenInput', () => {
+	const expectations = values(config.inputs).map((input) => [input]);
 
-test('GenInput render', () => {
-	const { getByRole } = render(GenInput(data));
-	const component = getByRole('genInput');
+	test.each(expectations)('GenInput render %p', (data) => {
+		const { getByRole } = render(genInput(data)(context));
+		const component = getByRole('genInput');
 
-	expect(component).toBeInTheDocument();
-	expect(getByRole(data.name)).toBeInTheDocument();
-	expect(getByRole(data.name)).toHaveTextContent(data.name);
-});
+		expect(component).toBeInTheDocument();
+		expect(getByRole(data.label)).toBeInTheDocument();
+		expect(getByRole(data.label)).toHaveTextContent(data.label);
+	});
 
-test('onChange fireEvent', () => {
-	// TODO: Use a better selector, than queryByPlaceholderText.
-	const component = render(GenInput(data)).queryByPlaceholderText(data.name);
+	test.each(expectations)('onChange fireEvent for %p', (data) => {
+		const value = {
+			text: rndString(),
+			number: String(rndBetween()),
 
-	// TODO: Use a random string as the value.
-	fireEvent.change(component, { target: { value: data.name }});
+		};
+		const updateName = data.label[0].toLowerCase() + data.label.slice(1);
+		const component = render(genInput(data)(context)).getByRole(`${ data.label }Input`);
 
-	expect(component).toBeInTheDocument();
-	expect(component).toHaveAttribute('type', data.type);
-	// TODO: Test the attribute, value.
-	expect(context.actions[`set${ data.name }`]).toHaveBeenCalledWith(data.name);
+		fireEvent.change(component, { target: { value: value[data.type] }});
+
+		expect(component).toBeInTheDocument();
+		expect(component).toHaveAttribute('type', data.type);
+		expect(component).toHaveAttribute('value', context.state[updateName]);
+		expect(context.actions[`set${ data.label }`]).toHaveBeenCalledWith(value[data.type]);
+	});
 });

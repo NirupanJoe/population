@@ -1,23 +1,23 @@
+/* eslint-disable react/display-name */
 import { React } from 'react';
-import context from '../core/context';
 
-// TODO: Use a higher order function.
-const GenInput = (data, key) => {
-	const { name, type } = data;
-	const updateName = name[0].toLowerCase() + name.slice(1);
-	// TODO: The role should be the key.
+const genInput = (data) => (context) => {
+	const { label, type } = data;
+	const { state } = context;
+	const updateName = label[0].toLowerCase() + label.slice(1);
 
 	return (
-		<label key={ key } role="genInput">
-			<div role={ name }>{name}</div>
+		<label key={ label } role="genInput">
+			<div role={ label }>{label}</div>
 			<input
-				placeholder={ name }
+				role={ `${ label }Input` }
+				placeholder={ label }
 				type={ type }
-				value={ context.state[updateName] }
-				onChange={ (evt) => context.actions[`set${ name }`](evt.target.value) }
+				value={ state[updateName] }
+				onChange={ (evt) => context.actions[`set${ label }`](evt.target.value) }
 			/>
 		</label>
 	);
 };
 
-export default GenInput;
+export default genInput;
