@@ -16,19 +16,20 @@ test('PopulationTable return table', () => {
 	jest.spyOn(Container, 'default')
 		.mockReturnValueOnce(<th role="populationTableHead"/>)
 		.mockReturnValueOnce(<tr role="populationTableBody"/>);
+
 	const { getByRole } = render(PopulationTable());
 	const component = getByRole('populationTable');
 
 	expect(component).toBeInTheDocument();
-	// TODO: Use forEach.
-	expect(getByRole('tableHead')).toBeInTheDocument();
-	// TODO: Test parent-child relationship.
-	expect(getByRole('tableTitle')).toBeInTheDocument();
-	expect(getByRole('tableBody')).toBeInTheDocument();
-	expect(getByRole('populationTableHead')).toBeInTheDocument();
-	expect(getByRole('populationTableBody')).toBeInTheDocument();
 
-	// TODO: Pass context instead.
+	['tableHead',
+		'tableTitle',
+		'tableBody',
+		'populationTableHead',
+		'populationTableBody'].forEach((table) =>
+		expect(getByRole(table)).toBeInTheDocument());
+	// TODO: Test parent-child relationship.
+
 	expect(Container.default)
 		.toHaveBeenCalledWith(context.config.tableTitle, PopulationTableHead);
 	expect(Container.default)

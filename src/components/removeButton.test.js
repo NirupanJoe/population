@@ -17,6 +17,5 @@ test('onClick fireEvent', () => {
 
 	fireEvent.click(component);
 
-	// TODO: Pass context instead.
 	expect(Remote.removePopulation).toHaveBeenCalledWith(id);
 });
