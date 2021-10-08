@@ -1,6 +1,6 @@
 .App {
 	text-align: center;
-
+	
 	.form-input {
 		display: flex;
 		flex-direction: column;
@@ -12,19 +12,50 @@
 		background: none;
 		text-align: left;
 	}
-	
-	@media screen and (min-width: 635px) {
-	.population {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr) 0.25fr;
-		border: 1px solid;
 
-		.attribute {
-			border-right: 1px solid gray;
-			padding: 2px;
-			overflow: hidden;
-			text-overflow: ellipsis;
+	@media screen and (min-width: 635px) {
+		.population {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr) 0.25fr;
+			border: 1px solid;
+		
+			.attribute {
+				border-right: 1px solid gray;
+				padding: 2px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 		}
 	}
-}
+	
+	@media screen and (max-width: 634px) {
+		.population-table {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 2%;
+			text-align: left;
+		}
+		
+		.population {
+			border: 1px solid;
+			display: grid;
+		}
+		
+		.population-table >div:first-child {
+			display: none;
+		}
+		
+		.attribute::before {
+			content: attr(data-name);
+		}
+		
+		.attribute {
+			display: grid;
+			grid-template-columns: minmax(70%, 30%) 1fr;
+		}
+
+		.remove-population {
+			grid-row: 1;
+		}
+	}
 }
