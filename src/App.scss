@@ -58,4 +58,11 @@
 			grid-row: 1;
 		}
 	}
+
+	@media screen and (max-width:450px) {
+		.population-table {
+			display: grid;
+			grid-template-columns: 1fr;
+		}
+	} 
 }
