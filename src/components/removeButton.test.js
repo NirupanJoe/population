@@ -8,6 +8,7 @@ test('RemoveButton render', () => {
 	const component = render(RemoveButton(id)).getByRole('removeButton');
 
 	expect(component).toBeInTheDocument();
+	expect(component).toHaveClass('remove-button');
 });
 
 test('onClick fireEvent', () => {
