@@ -14,10 +14,9 @@ describe('PopulationTableBody', () => {
 	const femalePopulation = 'femalePopulation';
 
 	test('PopulationTableBody return the table', () => {
-		const { getByRole } = render(<table><tbody>
-			{PopulationTableBody({
-				id, location, totalPopulation, malePopulation, femalePopulation,
-			})}</tbody></table>);
+		const { getByRole } = render(PopulationTableBody({
+			id, location, totalPopulation, malePopulation, femalePopulation,
+		}));
 		const component = getByRole('populationTableBody');
 
 		expect(component).toBeInTheDocument();
@@ -37,10 +36,9 @@ describe('PopulationTableBody', () => {
 		jest.spyOn(RemoveButton, 'default')
 			.mockReturnValue(<button role="removeButton"/>);
 
-		const { getByRole } = render(<table><tbody>
-			{PopulationTableBody({
-				id, location, totalPopulation, malePopulation, femalePopulation,
-			})}</tbody></table>);
+		const { getByRole } = render(PopulationTableBody({
+			id, location, totalPopulation, malePopulation, femalePopulation,
+		}));
 
 		expect(getByRole('removePopulation')).toBeInTheDocument();
 		expect(getByRole('removeButton')).toBeInTheDocument();

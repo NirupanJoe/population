@@ -1,16 +1,24 @@
 import { React } from 'react';
 import RemoveButton from './removeButton';
 
-// TODO: Use CSS grids instead of tables.
 const PopulationTableBody = ({
 	id, location, totalPopulation, malePopulation, femalePopulation,
 }) =>
-	<tr key={ id } role="populationTableBody">
-		<td role="location">{location}</td>
-		<td role="totalPopulation">{totalPopulation}</td>
-		<td role="malePopulation">{malePopulation}</td>
-		<td role="femalePopulation">{femalePopulation}</td>
-		<td role="removePopulation">{RemoveButton(id)}</td>
-	</tr>;
+	<div key={ id } className="population" role="populationTableBody">
+		<div className="attribute" role="location">{location}</div>
+		<div
+			className="attribute"
+			role="totalPopulation"
+		>{totalPopulation}</div>
+		<div className="attribute" role="malePopulation">{malePopulation}</div>
+		<div
+			className="attribute"
+			role="femalePopulation"
+		>{femalePopulation}</div>
+		<div
+			className="attribute"
+			role="removePopulation"
+		>{RemoveButton(id)}</div>
+	</div>;
 
 export default PopulationTableBody;

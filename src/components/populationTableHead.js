@@ -1,6 +1,12 @@
 import { React } from 'react';
 
 const PopulationTableHead = (head, key) =>
-	<th key={ key } role="populationTableHead">{head}</th>;
+	<div
+		key={ key }
+		className="attribute"
+		role="populationTableHead"
+	>
+		{head}
+	</div>;
 
 export default PopulationTableHead;

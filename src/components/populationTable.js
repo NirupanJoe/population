@@ -5,15 +5,11 @@ import PopulationTableHead from './populationTableHead';
 import PopulationTableBody from './populationTableBody';
 
 const PopulationTable = () =>
-	<table role="populationTable">
-		<thead role="tableHead">
-			<tr role="tableTitle">
-				{Container(context.config.tableTitle, PopulationTableHead)}
-			</tr>
-		</thead>
-		<tbody role="tableBody">
-			{Container(context.state.populations, PopulationTableBody)}
-		</tbody>
-	</table>;
+	<div role="populationTable" className="population-table">
+		<div role="populationTitle" className="population">
+			{Container(context.config.tableTitle, PopulationTableHead)}
+		</div>
+		{Container(context.state.populations, PopulationTableBody)}
+	</div>;
 
 export default PopulationTable;
