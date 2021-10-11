@@ -5,6 +5,7 @@ import { React } from 'react';
 import { render } from '@testing-library/react';
 import PopulationTableBody from './populationTableBody';
 import * as RemoveButton from './removeButton';
+import * as PopulationBodyShell from './populationBodyShell';
 
 describe('PopulationTableBody', () => {
 	const id = 'id';
@@ -14,34 +15,32 @@ describe('PopulationTableBody', () => {
 	const femalePopulation = 'femalePopulation';
 
 	test('PopulationTableBody return the table', () => {
+		jest.spyOn(PopulationBodyShell, 'default')
+			.mockReturnValueOnce(<div role={ location }/>)
+			.mockReturnValueOnce(<div role={ totalPopulation }/>)
+			.mockReturnValueOnce(<div role={ malePopulation }/>)
+			.mockReturnValueOnce(<div role={ femalePopulation }/>)
+		;
+		jest.spyOn(RemoveButton, 'default')
+			.mockReturnValue(<div role="removeButton"/>);
+
 		const { getByRole } = render(PopulationTableBody({
 			id, location, totalPopulation, malePopulation, femalePopulation,
 		}));
 		const component = getByRole('populationTableBody');
 
 		expect(component).toBeInTheDocument();
-		expect(getByRole('location')).toBeInTheDocument();
-		expect(getByRole('totalPopulation')).toBeInTheDocument();
-		expect(getByRole('malePopulation')).toBeInTheDocument();
-		expect(getByRole('femalePopulation')).toBeInTheDocument();
-
-		expect(getByRole('location')).toHaveTextContent(location);
-		expect(getByRole('totalPopulation')).toHaveTextContent(totalPopulation);
-		expect(getByRole('malePopulation')).toHaveTextContent(malePopulation);
-		expect(getByRole('femalePopulation'))
-			.toHaveTextContent(femalePopulation);
-	});
-
-	test('removePopulation in table', () => {
-		jest.spyOn(RemoveButton, 'default')
-			.mockReturnValue(<button role="removeButton"/>);
-
-		const { getByRole } = render(PopulationTableBody({
-			id, location, totalPopulation, malePopulation, femalePopulation,
-		}));
-
-		expect(getByRole('removePopulation')).toBeInTheDocument();
-		expect(getByRole('removeButton')).toBeInTheDocument();
-		expect(RemoveButton.default).toHaveBeenCalledWith(id);
+		expect(getByRole(location)).toBeInTheDocument();
+		expect(getByRole(totalPopulation)).toBeInTheDocument();
+		expect(getByRole(malePopulation)).toBeInTheDocument();
+		expect(getByRole(femalePopulation)).toBeInTheDocument();
+		expect(PopulationBodyShell.default)
+			.toHaveBeenCalledWith(location, location);
+		expect(PopulationBodyShell.default)
+			.toHaveBeenCalledWith(totalPopulation, totalPopulation);
+		expect(PopulationBodyShell.default)
+			.toHaveBeenCalledWith(malePopulation, malePopulation);
+		expect(PopulationBodyShell.default)
+			.toHaveBeenCalledWith(femalePopulation, femalePopulation);
 	});
 });

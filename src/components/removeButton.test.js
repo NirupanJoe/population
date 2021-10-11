@@ -5,10 +5,13 @@ import RemoveButton from './removeButton';
 const id = Symbol('id');
 
 test('RemoveButton render', () => {
-	const component = render(RemoveButton(id)).getByRole('removeButton');
+	const { getByRole } = render(RemoveButton(id));
+	const component = getByRole('removePopulation');
 
 	expect(component).toBeInTheDocument();
-	expect(component).toHaveClass('remove-button');
+	expect(component).toHaveClass('attribute remove-population');
+	expect(getByRole('removeButton')).toBeInTheDocument();
+	expect(getByRole('removeButton')).toHaveClass('remove-button');
 });
 
 test('onClick fireEvent', () => {
